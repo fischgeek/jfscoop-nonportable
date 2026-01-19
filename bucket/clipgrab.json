@@ -1,0 +1,43 @@
+
+{
+  "version": "3.9.15",
+  "description": "Downloader and converter for YouTube, Vimeo, Facebook and many other online video sites",
+  "homepage": "https://clipgrab.org/",
+  "license": "Freeware",
+  "url": "https://download.clipgrab.org/clipgrab-3.9.15-portable.exe",
+  "hash": "BDBD114A1A5D0EF3D985CF83C7D3F905BDF3E944D05BAF26CF197D70DE4812BF",
+
+  "installer": {
+    "script": [
+      "$exe = \"$dir\\clipgrab-3.9.15-portable.exe\"",
+      "Start-Process $exe '/S' -Wait -NoNewWindow"
+    ]
+  },
+
+  "uninstaller": {
+    "script": [
+      "$path = \"$env:ProgramFiles\\ClipGrab\\uninstall.exe\"",
+      "if (Test-Path $path) { Start-Process $path '/S' -Wait -NoNewWindow }"
+    ]
+  },
+
+  "bin": [
+    "$env:ProgramFiles\\ClipGrab\\clipgrab.exe"
+  ],
+
+  "shortcuts": [
+    [
+      "$env:ProgramFiles\\ClipGrab\\clipgrab.exe",
+      "ClipGrab"
+    ]
+  ],
+
+  "checkver": {
+    "url": "http://clipgrab.de/update/en",
+    "re": "ClipGrab\\s+([\\d.]+)\\s+for Windows"
+  },
+
+  "autoupdate": {
+    "url": "https://download.clipgrab.org/clipgrab-$version-portable.exe"
+  }
+}
