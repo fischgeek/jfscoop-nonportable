@@ -10,14 +10,14 @@
   "installer": {
     "script": [
       "$exe = \"$dir\\clipgrab-3.9.15-portable.exe\"",
-      "Start-Process $exe '/VERYSILENT' -Wait -NoNewWindow"
+      "Start-Process $exe '/VERYSILENT /SUPPRESSMSGBOXES /SP-' -Wait -NoNewWindow"
     ]
   },
 
   "uninstaller": {
     "script": [
       "$un = \"$env:ProgramFiles\\ClipGrab\\uninstall.exe\"",
-      "if (Test-Path $un) { Start-Process $un '/VERYSILENT' -Wait -NoNewWindow }"
+      "if (Test-Path $un) { Start-Process $un '/VERYSILENT /SUPPRESSMSGBOXES /SP-' -Wait -NoNewWindow }"
     ]
   },
 
@@ -37,6 +37,5 @@
   },
   "autoupdate": {
     "url": "https://download.clipgrab.org/clipgrab-$version-portable.exe"
-  },
-  "notes": "Installer is non-portable; manifest targets silent Inno/NSIS-style switches. If vendor changes installer tech, re-verify silent flags."
+  }
 }
