@@ -9,24 +9,26 @@
 
   "installer": {
     "script": [
-      "$exe = \"$dir\\clipgrab-3.9.15-portable.exe\"",
-      "Start-Process $exe '/VERYSILENT /SUPPRESSMSGBOXES /SP-' -Wait -NoNewWindow"
+      "$exe  = \"$dir\\clipgrab-3.9.15-portable.exe\"",
+      "$dest = \"$dir\\ClipGrab\"",
+      "if (!(Test-Path $dest)) { New-Item -ItemType Directory -Path $dest | Out-Null }",
+      "Start-Process $exe '/VERYSILENT /SUPPRESSMSGBOXES /SP- /NORESTART /NOICONS /DIR=""' + $dest + '""' -Wait -NoNewWindow"
     ]
   },
 
   "uninstaller": {
     "script": [
-      "$un = \"$env:ProgramFiles\\ClipGrab\\uninstall.exe\"",
-      "if (Test-Path $un) { Start-Process $un '/VERYSILENT /SUPPRESSMSGBOXES /SP-' -Wait -NoNewWindow }"
+      "$un = Get-ChildItem -Path \"$dir\\ClipGrab\" -Filter 'unins*.exe' -File -ErrorAction SilentlyContinue | Select-Object -First 1",
+      "if ($un) { Start-Process $un.FullName '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART' -Wait -NoNewWindow }"
     ]
   },
 
   "bin": [
-    "$env:ProgramFiles\\ClipGrab\\clipgrab.exe"
+    "$dir\\ClipGrab\\clipgrab.exe"
   ],
   "shortcuts": [
     [
-      "$env:ProgramFiles\\ClipGrab\\clipgrab.exe",
+      "$dir\\ClipGrab\\clipgrab.exe",
       "ClipGrab"
     ]
   ],
@@ -37,5 +39,6 @@
   },
   "autoupdate": {
     "url": "https://download.clipgrab.org/clipgrab-$version-portable.exe"
-  }
+  },
+  "notes": "Installed per-user in Scoop's app directory to avoid UAC prompts and ensure fully silent operation."
 }
