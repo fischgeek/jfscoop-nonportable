@@ -10,14 +10,14 @@
   "installer": {
     "script": [
       "$exe = \"$dir\\clipgrab-3.9.15-portable.exe\"",
-      "Start-Process $exe '/S' -Wait -NoNewWindow"
+      "Start-Process $exe '/VERYSILENT' -Wait -NoNewWindow"
     ]
   },
 
   "uninstaller": {
     "script": [
       "$path = \"$env:ProgramFiles\\ClipGrab\\uninstall.exe\"",
-      "if (Test-Path $path) { Start-Process $path '/S' -Wait -NoNewWindow }"
+      "if (Test-Path $path) { Start-Process $path '/VERYSILENT' -Wait -NoNewWindow }"
     ]
   },
 
