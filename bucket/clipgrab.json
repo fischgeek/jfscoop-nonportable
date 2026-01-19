@@ -16,15 +16,14 @@
 
   "uninstaller": {
     "script": [
-      "$path = \"$env:ProgramFiles\\ClipGrab\\uninstall.exe\"",
-      "if (Test-Path $path) { Start-Process $path '/VERYSILENT' -Wait -NoNewWindow }"
+      "$un = \"$env:ProgramFiles\\ClipGrab\\uninstall.exe\"",
+      "if (Test-Path $un) { Start-Process $un '/VERYSILENT' -Wait -NoNewWindow }"
     ]
   },
 
   "bin": [
     "$env:ProgramFiles\\ClipGrab\\clipgrab.exe"
   ],
-
   "shortcuts": [
     [
       "$env:ProgramFiles\\ClipGrab\\clipgrab.exe",
@@ -36,8 +35,8 @@
     "url": "http://clipgrab.de/update/en",
     "re": "ClipGrab\\s+([\\d.]+)\\s+for Windows"
   },
-
   "autoupdate": {
     "url": "https://download.clipgrab.org/clipgrab-$version-portable.exe"
-  }
+  },
+  "notes": "Installer is non-portable; manifest targets silent Inno/NSIS-style switches. If vendor changes installer tech, re-verify silent flags."
 }
